@@ -7,9 +7,14 @@ import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import com.mio.pages.main.MainState
 import com.mio.pages.main.MainUi
 import kotlinx.coroutines.launch
+import miokmm.composeapp.generated.resources.Res
+import miokmm.composeapp.generated.resources.microsoft_yahei_simpli
+import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import utils.NetHelper
 
@@ -24,9 +29,17 @@ fun App() {
         MainState.toast(test)
     }
 
-    MaterialTheme {
+    MaterialTheme(
+        typography = configTypography(),
+    ) {
         MainUi()
     }
+}
+
+@Composable
+fun configTypography(): Typography {
+    val chineseFontFamily = FontFamily(Font(Res.font.microsoft_yahei_simpli, FontWeight.Normal))
+    return Typography(defaultFontFamily = chineseFontFamily)
 }
 
 @Composable
