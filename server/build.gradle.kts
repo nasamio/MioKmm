@@ -20,4 +20,6 @@ dependencies {
     testImplementation(libs.kotlin.test.junit)
 //    cors
     implementation(libs.ktor.server.cors)
+//    gson
+    implementation(libs.gson)
 }

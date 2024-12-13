@@ -1,5 +1,7 @@
 package com.mio
 
+import bean.User
+import com.google.gson.Gson
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -13,19 +15,40 @@ fun main() {
         .start(wait = true)
 }
 
+val gson by lazy { Gson() }
+
+suspend fun ApplicationCall.callback(any: Any) {
+    respondText(gson.toJson(any), ContentType.Application.Json)
+}
+
 fun Application.module() {
     install(CORS) {
         anyHost() // 允许所有来源，生产环境中请限制为特定来源
         allowMethod(HttpMethod.Get)
         allowMethod(HttpMethod.Post)
         allowHeader(HttpHeaders.ContentType)
-
     }
+
 
 
     routing {
+
         get("/") {
             call.respondText("Ktor: ${Greeting().greet()}")
         }
+
+        // 登录
+        post("/login") {
+            val name = call.request.queryParameters["name"]
+            val pwd = call.request.queryParameters["pwd"]
+            println("name: $name, pwd: $pwd")
+
+            val user = User(1, "mio", "123456")
+            call.callback(user)
+
+        }
     }
+
+
+
 }

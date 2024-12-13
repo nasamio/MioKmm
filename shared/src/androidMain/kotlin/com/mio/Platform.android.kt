@@ -13,3 +13,8 @@ actual fun getPlatform(): Platform = AndroidPlatform()
 actual fun httpClient(config: HttpClientConfig<*>.() -> Unit) = HttpClient(Android) {
     config(this)
 }
+
+
+actual fun getRequestHost(): String = "http://192.168.3.10"
+
+actual fun getRequestPort(): Int = 8080

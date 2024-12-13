@@ -2,14 +2,12 @@
 
 package com.mio
 
-import androidx.compose.foundation.LocalIndication
-import androidx.compose.foundation.text.selection.LocalTextSelectionColors
 import androidx.compose.material.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import com.mio.pages.main.MainState
 import com.mio.pages.main.MainUi
 import kotlinx.coroutines.launch
 import miokmm.composeapp.generated.resources.Res
@@ -24,13 +22,13 @@ fun App() {
     val scope = rememberCoroutineScope()
     scope.launch {
         println("App: start test...")
-        val test = NetHelper.test()
-        println("App: $test")
-        MainState.toast(test)
+        NetHelper.login("mio", "123456").collect {
+            println("App: $it")
+        }
     }
 
     MaterialTheme(
-        typography = configTypography(),
+        typography = if (isWasm()) configTypography() else MaterialTheme.typography,
     ) {
         MainUi()
     }

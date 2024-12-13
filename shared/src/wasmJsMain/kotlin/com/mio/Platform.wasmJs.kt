@@ -12,3 +12,7 @@ actual fun getPlatform(): Platform = WasmPlatform()
 actual fun httpClient(config: HttpClientConfig<*>.() -> Unit) = HttpClient(Js) {
     config(this)
 }
+
+actual fun getRequestHost(): String = "http://192.168.3.10"
+
+actual fun getRequestPort(): Int = 8080
