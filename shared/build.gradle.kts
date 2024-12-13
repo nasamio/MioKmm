@@ -34,10 +34,21 @@ kotlin {
             }
         }
     }
-    
+
     sourceSets {
         commonMain.dependencies {
-            // put your Multiplatform dependencies here
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.serialization)
+            implementation(libs.ktor.client.content.negotiation)
+        }
+        androidMain.dependencies {
+            implementation(libs.ktor.client.android)
+        }
+        jvmMain.dependencies {
+            implementation(libs.ktor.client.desktop)
+        }
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
         }
     }
 }

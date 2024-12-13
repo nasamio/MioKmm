@@ -14,9 +14,9 @@ object MainState {
     fun toast(msg: String) {
         showToast.value = msg
 
-        GlobalScope.launch {
-            delay(1_000)
-            showToast.value = ""
-        }
+//        GlobalScope.launch {
+//            delay(1_000)
+//            showToast.value = ""
+//        }
     }
 }
