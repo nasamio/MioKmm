@@ -43,6 +43,7 @@ kotlin {
             implementation(libs.ktor.client.serialization.json)
 
             implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.io)
 
 
         }

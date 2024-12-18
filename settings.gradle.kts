@@ -3,6 +3,8 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {
+        maven("https://jitpack.io")
+
         google {
             mavenContent {
                 includeGroupAndSubgroups("androidx")
@@ -17,6 +19,8 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories {
+        maven("https://jitpack.io")
+
         google {
             mavenContent {
                 includeGroupAndSubgroups("androidx")

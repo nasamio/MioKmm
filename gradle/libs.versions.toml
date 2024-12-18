@@ -20,6 +20,7 @@ ktor-client = "3.0.2"
 logback = "1.5.11"
 navigationCompose = "2.8.5"
 gson = "2.10.1"
+coil3 = "3.0.4"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -48,7 +49,11 @@ ktor-server-cors = { module = "io.ktor:ktor-server-cors", version.ref = "ktor" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 # 路由 navigation
 #androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
-
+# 图片
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil3" }
+coil-compose-core = { module = "io.coil-kt.coil3:coil-compose-core", version.ref = "coil3" }
+coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil3" }
+coil-mp = { module = "io.coil-kt.coil3:coil", version.ref = "coil3" }
 
 # Ktor-Client
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-client" }
@@ -59,6 +64,8 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 ktor-client-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor-client" }
 # io.ktor:ktor-client-serialization
 ktor-client-serialization = {module = "io.ktor:ktor-client-serialization", version.ref = "ktor-client"}
+# 包含io/ktor/utils/io/jvm/nio/WritingKt的ktor
+ktor-io = { module = "io.ktor:ktor-io", version.ref = "ktor" }
 
 
 [plugins]

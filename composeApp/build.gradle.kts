@@ -59,7 +59,10 @@ kotlin {
             implementation("io.github.vinceglb:filekit-core:0.8.8")
 //            // Enables FileKit with Composable utilities
 //            implementation("io.github.vinceglb:filekit-compose:0.8.8")
-
+            implementation(libs.coil.compose.core)
+            implementation(libs.coil.mp)
+            implementation(libs.coil.network.ktor)
+            implementation(libs.coil.compose)
         }
         androidMain.dependencies {
             implementation(compose.preview)
