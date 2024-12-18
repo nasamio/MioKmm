@@ -4,7 +4,9 @@ import io.ktor.client.*
 
 interface Platform {
     val name: String
+
 }
+
 
 expect fun getPlatform(): Platform
 
@@ -17,3 +19,7 @@ expect fun getRequestHost(): String
 
 // 请求端口
 expect fun getRequestPort(): Int
+
+
+// 选择图片
+expect fun choosePic(onRes: (String) -> Unit)

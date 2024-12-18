@@ -5,11 +5,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import io.github.vinceglb.filekit.core.FileKit
+import java.lang.ref.WeakReference
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        contextRef = WeakReference(this@MainActivity)
         super.onCreate(savedInstanceState)
-
+        FileKit.init(this)
         setContent {
             App()
         }

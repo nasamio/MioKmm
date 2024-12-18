@@ -9,6 +9,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import com.mio.pages.main.MainUi
+import com.mio.pages.test.TestState
+import com.mio.pages.test.TestUi
 import kotlinx.coroutines.launch
 import miokmm.composeapp.generated.resources.Res
 import miokmm.composeapp.generated.resources.microsoft_yahei_simpli
@@ -21,16 +23,17 @@ import utils.NetHelper
 fun App() {
     val scope = rememberCoroutineScope()
     scope.launch {
-        println("App: start test...")
-        NetHelper.login("mio", "123456").collect {
-            println("App: $it")
-        }
+
     }
 
     MaterialTheme(
         typography = if (isWasm()) configTypography() else MaterialTheme.typography,
     ) {
-        MainUi()
+        if (TestState.testMode) {
+            TestUi()
+        } else {
+            MainUi()
+        }
     }
 }
 

@@ -16,3 +16,5 @@ actual fun httpClient(config: HttpClientConfig<*>.() -> Unit) = HttpClient(Js) {
 actual fun getRequestHost(): String = "http://192.168.3.10"
 
 actual fun getRequestPort(): Int = 8080
+actual fun choosePic(onRes: (String) -> Unit) {
+}

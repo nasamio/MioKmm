@@ -43,9 +43,13 @@ kotlin {
             implementation(libs.ktor.client.serialization.json)
 
             implementation(libs.ktor.client.content.negotiation)
+
+
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.android)
+
+
         }
         jvmMain.dependencies {
             implementation(libs.ktor.client.desktop)
