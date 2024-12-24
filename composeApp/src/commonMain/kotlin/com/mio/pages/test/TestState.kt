@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 
 object TestState {
     // 是否处于测试模式 测试模式只能进入测试页面
-    val testMode = true
+    val testMode = false
 
     val testList = mutableListOf(
         TestData("图片选择") {

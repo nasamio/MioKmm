@@ -2,6 +2,8 @@ package com.mio
 
 import bean.User
 import com.google.gson.Gson
+import io.ktor.client.*
+import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -48,7 +50,6 @@ fun Application.module() {
 
         }
     }
-
 
 
 }

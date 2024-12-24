@@ -6,6 +6,7 @@ import com.mio.getRequestPort
 import com.mio.httpClient
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.engine.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.kotlinx.serializer.*
@@ -41,9 +42,14 @@ object NetHelper {
         httpClient.close()
     }
 
-    inline fun <reified T> get(url: String, params: Map<String, String> = emptyMap()): Flow<T> {
+    inline fun <reified T> get(
+        url: String,
+        headers: Map<String, String> = emptyMap(),
+        params: Map<String, String> = emptyMap(),
+    ): Flow<T> {
         return flow {
             val response = httpClient.get(url) {
+                headers.forEach { header(it.key, it.value) }
                 params.forEach { parameter(it.key, it.value) }
             }
             val result = response.body<T>()
@@ -56,9 +62,14 @@ object NetHelper {
     }
 
 
-    inline fun <reified T> post(url: String, params: Map<String, String> = emptyMap()): Flow<T> {
+    inline fun <reified T> post(
+        url: String,
+        headers: Map<String, String> = emptyMap(),
+        params: Map<String, String> = emptyMap()
+    ): Flow<T> {
         return flow {
             val response = httpClient.post(url) {
+                headers.forEach { header(it.key, it.value) }
                 params.forEach { parameter(it.key, it.value) }
             }
             val result = response.body<T>()

@@ -30,12 +30,20 @@ kotlin {
             commonWebpackConfig {
                 outputFileName = "composeApp.js"
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+//                    open = false
                     port = 3579
                     static = (static ?: mutableListOf()).apply {
                         // Serve sources to debug inside browser
                         add(rootDirPath)
                         add(projectDirPath)
                     }
+                    proxy = mutableListOf(
+                        KotlinWebpackConfig.DevServer.Proxy(
+                            context = mutableListOf(),
+                            target = "127.0.0.1:15732",
+                            changeOrigin = true,
+                        )
+                    )
                 }
             }
         }

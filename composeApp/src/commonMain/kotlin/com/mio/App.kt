@@ -56,10 +56,12 @@ fun initCoil() {
     println("initCoil: 初始化coil开始...")
     // 初始化coil
     setSingletonImageLoaderFactory { context ->
-        ImageLoader.Builder(context).memoryCachePolicy(CachePolicy.DISABLED).memoryCache {
-            MemoryCache.Builder().maxSizePercent(context, 0.3).strongReferencesEnabled(false).build()
-        }.diskCachePolicy(CachePolicy.DISABLED).networkCachePolicy(CachePolicy.DISABLED)
-            .crossfade(true).logger(DebugLogger()).build()
+//        ImageLoader.Builder(context).memoryCachePolicy(CachePolicy.DISABLED).memoryCache {
+//            MemoryCache.Builder().maxSizePercent(context, 0.3).strongReferencesEnabled(false).build()
+//        }.diskCachePolicy(CachePolicy.DISABLED).networkCachePolicy(CachePolicy.DISABLED)
+//            .crossfade(true).logger(DebugLogger()).build()
+
+        ImageLoader.Builder(context).build()
     }
     println("initCoil: 初始化coil结束...")
 }

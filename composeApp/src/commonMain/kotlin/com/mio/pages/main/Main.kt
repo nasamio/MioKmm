@@ -23,6 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.mio.pages.home.HomeUi
 import com.mio.pages.login.LoginState
 import com.mio.pages.login.LoginUi
+import com.mio.pages.smms.smmsUi
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -38,13 +39,16 @@ fun MainUi() {
         NavHost(
             modifier = Modifier.fillMaxSize(),
             navController = navController,
-            startDestination = if (isLogin.value) "home" else "login"
+            startDestination = if (isLogin.value) "home" else "smms"
         ) {
             composable("login") {
                 LoginUi()
             }
             composable("home") {
                 HomeUi()
+            }
+            composable("smms") {
+                smmsUi()
             }
         }
 

@@ -22,4 +22,7 @@ dependencies {
     implementation(libs.ktor.server.cors)
 //    gson
     implementation(libs.gson)
+
+    // 请求
+    implementation(libs.ktor.client.desktop)
 }
