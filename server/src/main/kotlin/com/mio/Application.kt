@@ -1,7 +1,10 @@
 package com.mio
 
+import bean.KmmResponse
 import bean.User
 import com.google.gson.Gson
+import com.mio.routing.userRouting
+import configureDatabases
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -18,13 +21,9 @@ fun main() {
         .start(wait = true)
 }
 
-val gson by lazy { Gson() }
-
-suspend fun ApplicationCall.callback(any: Any) {
-    respondText(gson.toJson(any), ContentType.Application.Json)
-}
 
 fun Application.module() {
+
     install(CORS) {
         anyHost() // 允许所有来源，生产环境中请限制为特定来源
         allowMethod(HttpMethod.Get)
@@ -32,6 +31,8 @@ fun Application.module() {
         allowHeader(HttpHeaders.ContentType)
     }
 
+    configureDatabases()
+    userRouting()
 
 
     routing {
@@ -58,4 +59,19 @@ fun Application.module() {
     }
 
 
+}
+
+
+val gson by lazy { Gson() }
+
+suspend fun ApplicationCall.callback(any: Any) {
+    respondText(gson.toJson(any), ContentType.Application.Json)
+}
+
+suspend fun ApplicationCall.callSuccess(any: Any) {
+    callback(KmmResponse(200, "success", any))
+}
+
+suspend fun ApplicationCall.callError(any: Any) {
+    callback(KmmResponse(500, "error", any))
 }
