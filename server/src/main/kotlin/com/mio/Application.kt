@@ -7,6 +7,7 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
+import io.ktor.server.http.content.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.response.*
@@ -34,6 +35,9 @@ fun Application.module() {
 
 
     routing {
+        ImageRouting()
+
+
 
         get("/") {
             call.respondText("Ktor: ${Greeting().greet()}")
@@ -49,6 +53,8 @@ fun Application.module() {
             call.callback(user)
 
         }
+
+
     }
 
 

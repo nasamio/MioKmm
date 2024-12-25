@@ -47,6 +47,7 @@ object NetHelper {
         headers: Map<String, String> = emptyMap(),
         params: Map<String, String> = emptyMap(),
     ): Flow<T> {
+        println("get: 请求接口:$url")
         return flow {
             val response = httpClient.get(url) {
                 headers.forEach { header(it.key, it.value) }

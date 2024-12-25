@@ -6,7 +6,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Snackbar
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -23,7 +22,7 @@ import androidx.navigation.compose.rememberNavController
 import com.mio.pages.home.HomeUi
 import com.mio.pages.login.LoginState
 import com.mio.pages.login.LoginUi
-import com.mio.pages.smms.smmsUi
+import com.mio.pages.ib.IbUi
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -48,7 +47,7 @@ fun MainUi() {
                 HomeUi()
             }
             composable("smms") {
-                smmsUi()
+                IbUi()
             }
         }
 

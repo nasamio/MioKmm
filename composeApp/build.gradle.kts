@@ -29,6 +29,9 @@ kotlin {
             val projectDirPath = project.projectDir.path
             commonWebpackConfig {
                 outputFileName = "composeApp.js"
+                entry?.let {
+                    println("entry: ${it.absolutePath}")
+                }
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
 //                    open = false
                     port = 3579
@@ -37,13 +40,14 @@ kotlin {
                         add(rootDirPath)
                         add(projectDirPath)
                     }
-                    proxy = mutableListOf(
-                        KotlinWebpackConfig.DevServer.Proxy(
-                            context = mutableListOf(),
-                            target = "127.0.0.1:15732",
-                            changeOrigin = true,
-                        )
-                    )
+//                    proxy = mutableListOf(
+//                        KotlinWebpackConfig.DevServer.Proxy(
+//                            context = mutableListOf("/api"),
+//                            target = "https://sm.ms/api/v2",
+//
+//                            changeOrigin = true,
+//                        )
+//                    )
                 }
             }
         }
