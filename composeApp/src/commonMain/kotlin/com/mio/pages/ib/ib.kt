@@ -25,6 +25,7 @@ import bean.smms.SmmsImage
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
+import com.mio.copyQq
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import utils.IbHelper

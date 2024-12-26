@@ -8,6 +8,10 @@ import userService
 fun Application.userRouting() {
     routing {
         get("/getAllUser") {
+            // 获取当前服务器ip
+
+
+
             userService.queryAll().let {
                 call.callSuccess(it)
             }

@@ -19,6 +19,7 @@ import coil3.util.DebugLogger
 import com.mio.pages.main.MainUi
 import com.mio.pages.test.TestState
 import com.mio.pages.test.TestUi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import miokmm.composeapp.generated.resources.Res
 import miokmm.composeapp.generated.resources.microsoft_yahei_simpli
@@ -26,6 +27,9 @@ import okio.FileSystem
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import utils.NetHelper
+
+val copyQq = MutableStateFlow(true)
+
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
