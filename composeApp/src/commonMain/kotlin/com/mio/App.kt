@@ -28,7 +28,7 @@ import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import utils.NetHelper
 
-val copyQq = MutableStateFlow(true)
+val copyQq = MutableStateFlow(false)
 
 
 @OptIn(ExperimentalCoilApi::class)

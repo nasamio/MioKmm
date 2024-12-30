@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.mio.pages.animation.animationUi
 import com.mio.pages.home.HomeUi
 import com.mio.pages.login.LoginState
 import com.mio.pages.login.LoginUi
@@ -33,12 +34,13 @@ fun MainUi() {
         contentAlignment = androidx.compose.ui.Alignment.Center
     ) {
         val navController = rememberNavController()
+        val studyMode = MainState.studyMode.collectAsState()
         val isLogin = LoginState.isLogin.collectAsState()
 
         NavHost(
             modifier = Modifier.fillMaxSize(),
             navController = navController,
-            startDestination = if (isLogin.value) "home" else "smms"
+            startDestination = studyMode.value.ifEmpty { if (isLogin.value) "home" else "smms" }
         ) {
             composable("login") {
                 LoginUi()
@@ -48,6 +50,9 @@ fun MainUi() {
             }
             composable("smms") {
                 IbUi()
+            }
+            composable("animation") {
+                animationUi()
             }
         }
 

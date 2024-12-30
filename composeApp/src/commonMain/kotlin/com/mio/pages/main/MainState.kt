@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(DelicateCoroutinesApi::class)
 object MainState {
+    val studyMode = MutableStateFlow("animation") // 未进入学习页面
 
     val showToast = MutableStateFlow("")
 

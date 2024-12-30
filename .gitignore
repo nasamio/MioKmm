@@ -16,3 +16,4 @@ captures
 !*.xcodeproj/project.xcworkspace/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
+/composeApp/hs_err_pid46744.log
