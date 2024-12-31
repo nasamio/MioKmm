@@ -15,18 +15,10 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Button
-import androidx.compose.material.Slider
-import androidx.compose.material.Switch
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -36,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.CornerRadius
@@ -85,8 +78,83 @@ fun animationUi() {
             modifier = Modifier.width(200.dp)
                 .height(400.dp)
         )
+
+        MioTabRow(
+            modifier = Modifier.width(200.dp)
+                .height(400.dp),
+        )
     }
 
+}
+
+@Composable
+fun MioTabRow(modifier: Modifier) {
+    var selectedTabIndex by remember { mutableStateOf(0) }
+    val tabs = listOf("Tab 1", "Tab 2", "Tab 3")
+
+    var tabHeight by remember { mutableStateOf(0.dp) }
+
+    Column(
+        modifier = modifier,
+    ) {
+        TabRow(
+            selectedTabIndex = selectedTabIndex,
+            modifier = Modifier.fillMaxWidth()
+                .graphicsLayer {
+                    tabHeight = size.height.toDp()
+                },
+            backgroundColor = Color.Transparent,
+            indicator = { tabPositions ->
+                TabRowDefaults.Indicator(
+                    Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex])
+                        .offset(y = -tabHeight + TabRowDefaults.IndicatorHeight)
+                )
+            }
+        ) {
+            tabs.forEachIndexed { index, title ->
+                Tab(
+                    modifier = Modifier.drawWithContent {
+                        drawContent()
+
+                        // 如果是第一个 就在左右侧绘制竖线 如果不是 就在右侧绘制横线
+
+                        val color = Color.Black.copy(alpha = .1f)
+                        val strokeWidth = 1f
+                        if (index == 0) {
+                            drawLine(
+                                color = color,
+                                start = Offset(0f, 0f),
+                                end = Offset(0f, size.height),
+                                strokeWidth = strokeWidth
+                            )
+                        }
+
+                        drawLine(
+                            color = color,
+                            start = Offset(size.width, 0f),
+                            end = Offset(size.width, size.height),
+                            strokeWidth = strokeWidth
+                        )
+                    },
+                    selected = selectedTabIndex == index,
+                    onClick = { selectedTabIndex = index },
+                    text = {
+                        Text(
+                            text = title,
+                            color = if (selectedTabIndex == index) Color(0xff1e80ff) else Color.Black,
+                        )
+                    },
+                    selectedContentColor = Color.Transparent,
+                    unselectedContentColor = Color.Transparent,
+                )
+            }
+        }
+        when (selectedTabIndex) {
+            0 -> Text("Content for Tab 1")
+            1 -> Text("Content for Tab 2")
+            2 -> Text("Content for Tab 3")
+        }
+    }
 }
 
 @Composable
@@ -97,8 +165,6 @@ fun MioAnimateValue(modifier: Modifier) {
     ) {
         var sides by remember { mutableStateOf(4f) }
         var length by remember { mutableStateOf(30.dp.value) }
-
-
 
 
         // 绘制一个多边形

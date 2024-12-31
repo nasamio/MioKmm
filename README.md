@@ -16,12 +16,13 @@
 
 执行下面的指令，进行各个模块的构建和运行:
 
-| 功能                            | 指令                                                  |
-|-------------------------------|-----------------------------------------------------|
-| 服务端运行                         | `./gradlew :server:run`                             |
-| 运行web网页端(wasm)                | `./gradlew :composeApp:wasmJsBrowserDevelopmentRun` |
-| 运行桌面端(jvm)                    | `./gradlew :composeApp:run`                         |
-| 安装移动端(android)                | `./gradlew :composeApp:installAndroidAndRun`        |                       | Build the docker image to use with the fat JAR      |               |
+| 功能             | 指令                                                  |
+|----------------|-----------------------------------------------------|
+| 服务端运行          | `./gradlew :server:run`                             |
+| 运行web网页端(wasm) | `./gradlew :composeApp:wasmJsBrowserDevelopmentRun` |
+| 运行桌面端(jvm)     | `./gradlew :composeApp:run`                         |
+| 安装移动端(android) | `./gradlew :composeApp:installAndroidAndRun`        |  
+| 打包web网页端(wasm) | `./gradlew :composeApp:wasmJsBrowserDistribution`   | 
 
 ## 结尾
 本项目用于学习KMP项目,非商业用途.
