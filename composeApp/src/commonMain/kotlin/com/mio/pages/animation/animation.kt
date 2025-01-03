@@ -58,33 +58,39 @@ private enum class ImageState {
 
 @Composable
 fun animationUi() {
-    Row() {
-        HoverImage(
-            modifier = Modifier.width(200.dp)
-        )
-        val check = remember { mutableStateOf(false) }
-        Switch(
-            checked = check.value,
-            onCheckedChange = { check.value = it },
-            modifier = Modifier
-        )
-        MioSwitch(
-            modifier = Modifier.width(56.dp)
-                .height(48.dp),
-            checked = check.value,
-            onCheckedChange = { check.value = it }
-        )
-        MioAnimateValue(
-            modifier = Modifier.width(200.dp)
-                .height(400.dp)
-        )
+        Row() {
+            HoverImage(
+                modifier = Modifier.width(200.dp)
+            )
+            val check = remember { mutableStateOf(false) }
+            Switch(
+                checked = check.value,
+                onCheckedChange = { check.value = it },
+                modifier = Modifier
+            )
+            MioSwitch(
+                modifier = Modifier.width(56.dp)
+                    .height(48.dp),
+                checked = check.value,
+                onCheckedChange = { check.value = it }
+            )
+            MioAnimateValue(
+                modifier = Modifier.width(200.dp)
+                    .height(400.dp)
+            )
 
-        MioTabRow(
-            modifier = Modifier.width(200.dp)
-                .height(400.dp),
-        )
+            MioTabRow(
+                modifier = Modifier.width(200.dp)
+                    .height(400.dp),
+            )
+        }
+}
+
+@Composable
+fun MioBezier(modifier: Modifier) {
+    Canvas(modifier = modifier.border(1.dp, Color.Black)) {
+
     }
-
 }
 
 @Composable

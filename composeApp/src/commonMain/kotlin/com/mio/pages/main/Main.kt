@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.mio.pages.bezier.Bezier
 import com.mio.pages.animation.animationUi
 import com.mio.pages.home.HomeUi
 import com.mio.pages.login.LoginState
@@ -53,6 +54,9 @@ fun MainUi() {
             }
             composable("animation") {
                 animationUi()
+            }
+            composable("bezier") {
+                Bezier()
             }
         }
 

@@ -21,6 +21,7 @@ logback = "1.5.11"
 navigationCompose = "2.8.5"
 gson = "2.10.1"
 coil3 = "3.0.4"
+core = "1.47.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -66,6 +67,7 @@ ktor-client-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-
 ktor-client-serialization = {module = "io.ktor:ktor-client-serialization", version.ref = "ktor-client"}
 # 包含io/ktor/utils/io/jvm/nio/WritingKt的ktor
 ktor-io = { module = "io.ktor:ktor-io", version.ref = "ktor" }
+core = { group = "com.google.ar", name = "core", version.ref = "core" }
 
 
 [plugins]

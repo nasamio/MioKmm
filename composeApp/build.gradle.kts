@@ -33,22 +33,14 @@ kotlin {
                     println("entry: ${it.absolutePath}")
                 }
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-//                    open = false
                     port = 3579
                     static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
                         add(rootDirPath)
                         add(projectDirPath)
                     }
-//                    proxy = mutableListOf(
-//                        KotlinWebpackConfig.DevServer.Proxy(
-//                            context = mutableListOf("/api"),
-//                            target = "https://sm.ms/api/v2",
-//
-//                            changeOrigin = true,
-//                        )
-//                    )
                 }
+                progressReporter = true
+                showProgress = true
             }
         }
         binaries.executable()
@@ -119,6 +111,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.core)
     debugImplementation(compose.uiTooling)
 }
 
