@@ -30,6 +30,7 @@ import utils.NetHelper
 
 val copyQq = MutableStateFlow(false)
 
+val testMap = MutableStateFlow(true)
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable

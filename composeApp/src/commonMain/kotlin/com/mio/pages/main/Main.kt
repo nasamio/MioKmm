@@ -25,6 +25,7 @@ import com.mio.pages.home.HomeUi
 import com.mio.pages.login.LoginState
 import com.mio.pages.login.LoginUi
 import com.mio.pages.ib.IbUi
+import com.mio.pages.map.MapUi
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
@@ -57,6 +58,9 @@ fun MainUi() {
             }
             composable("bezier") {
                 Bezier()
+            }
+            composable("map") {
+                MapUi()
             }
         }
 

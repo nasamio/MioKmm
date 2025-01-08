@@ -76,6 +76,9 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
+
+            // gson
+            implementation("com.google.code.gson:gson:2.10.1")
         }
         wasmJsMain.dependencies {
         }
