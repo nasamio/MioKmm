@@ -55,6 +55,7 @@ import kotlinx.serialization.json.Json
 import miokmm.composeapp.generated.resources.Res
 import miokmm.composeapp.generated.resources.ic_qq
 import miokmm.composeapp.generated.resources.ic_user
+import openBrowser
 import org.jetbrains.compose.resources.painterResource
 import utils.NetHelper
 import kotlin.time.Duration.Companion.seconds
@@ -76,8 +77,10 @@ fun aiUi() {
 
         delay(1_000L)
         sendMessage("你好")
-//        delay(3_000L)
+        delay(3_000L)
 //        sendMessage("100+100等于多少")
+        testFunctionCall()
+//        openBrowser("www.baidu.com")
     }
 
 

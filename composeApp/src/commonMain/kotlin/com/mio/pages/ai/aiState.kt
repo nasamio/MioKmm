@@ -1,18 +1,19 @@
 package com.mio.pages.ai
 
 import androidx.compose.ui.graphics.Color
-import com.aallam.openai.api.chat.ChatCompletionRequest
-import com.aallam.openai.api.chat.ChatMessage
-import com.aallam.openai.api.chat.ChatRole
+import com.aallam.openai.api.chat.*
 import com.aallam.openai.api.core.FinishReason
 import com.aallam.openai.api.http.Timeout
 import com.aallam.openai.api.model.ModelId
 import com.aallam.openai.client.OpenAI
 import com.aallam.openai.client.OpenAIConfig
 import com.aallam.openai.client.OpenAIHost
+import com.mio.pages.ai.aiState.chatMessage
+import com.mio.pages.ai.aiState.openAI
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.serialization.json.*
 import kotlin.time.Duration.Companion.seconds
 
 object aiState {
@@ -69,6 +70,17 @@ object aiState {
         }
     }
 }
+
+suspend fun testFunctionCall() {
+    functionChat("打开github").content.let {
+        println("testFunctionCall:[ $it ]")
+    }
+}
+
+
+
+
+
 
 object Config {
     val contentTextColor = MutableStateFlow(Color(0xffffffff))
