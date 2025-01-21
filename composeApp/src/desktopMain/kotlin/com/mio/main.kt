@@ -16,7 +16,7 @@ fun main() = application {
         position = WindowPosition(Alignment.Center),
     )
 
-    val showMain = false
+    val showMain = true
     if (showMain) {
         Window(
             onCloseRequest = ::exitApplication,

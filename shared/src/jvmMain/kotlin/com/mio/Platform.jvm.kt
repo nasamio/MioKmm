@@ -1,7 +1,7 @@
 package com.mio
 
 import io.ktor.client.*
-import io.ktor.client.engine.okhttp.*
+import io.ktor.client.engine.apache.*
 import java.io.File
 import javax.swing.JFileChooser
 import javax.swing.SwingUtilities
@@ -13,7 +13,20 @@ class JVMPlatform : Platform {
 actual fun getPlatform(): Platform = JVMPlatform()
 
 
-actual fun httpClient(config: HttpClientConfig<*>.() -> Unit) = HttpClient(OkHttp) {
+actual fun httpClient(config: HttpClientConfig<*>.() -> Unit) = HttpClient(Apache) {
+    engine {
+        followRedirects = true
+        socketTimeout = 10_000
+        connectTimeout = 10_000
+        connectionRequestTimeout = 20_000
+        customizeClient {
+            setMaxConnTotal(1000)
+            setMaxConnPerRoute(100)
+        }
+        customizeRequest {
+            // TODO: request transformations
+        }
+    }
     config(this)
 }
 

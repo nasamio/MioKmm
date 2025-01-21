@@ -72,3 +72,6 @@ android {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
 }
+dependencies {
+    implementation("io.ktor:ktor-client-apache:3.0.2")
+}

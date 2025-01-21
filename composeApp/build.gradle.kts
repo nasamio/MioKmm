@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
@@ -67,10 +68,20 @@ kotlin {
             implementation(libs.coil.mp)
             implementation(libs.coil.network.ktor)
             implementation(libs.coil.compose)
+            // ktor
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.serialization)
+            implementation(libs.ktor.client.serialization.json)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.io)
+            // ai
+            implementation ("com.aallam.openai:openai-client:4.0.0-beta01")
+            implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.21")
         }
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.android)
         }
         val desktopMain by getting
         desktopMain.dependencies {
@@ -79,8 +90,10 @@ kotlin {
 
             // gson
             implementation("com.google.code.gson:gson:2.10.1")
+            implementation(libs.ktor.client.desktop)
         }
         wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
         }
     }
 }
