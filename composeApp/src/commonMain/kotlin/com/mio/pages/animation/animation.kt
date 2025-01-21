@@ -1,18 +1,8 @@
 package com.mio.pages.animation
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateColor
-import androidx.compose.animation.core.AnimationVector
-import androidx.compose.animation.core.AnimationVector1D
-import androidx.compose.animation.core.TwoWayConverter
-import androidx.compose.animation.core.animateDp
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.animateValue
-import androidx.compose.animation.core.updateTransition
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.*
@@ -30,19 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.StrokeJoin
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.graphics.drawscope.rotateRad
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import miokmm.composeapp.generated.resources.Res
@@ -58,6 +42,7 @@ private enum class ImageState {
 
 @Composable
 fun animationUi() {
+    Column {
         Row() {
             HoverImage(
                 modifier = Modifier.width(200.dp)
@@ -84,6 +69,62 @@ fun animationUi() {
                     .height(400.dp),
             )
         }
+
+        MioAnimateSymbol(
+            modifier = Modifier.fillMaxWidth()
+                .height(400.dp)
+                .background(Color.Black.copy(alpha = .1f))
+        )
+    }
+}
+
+@Composable
+fun MioAnimateSymbol(modifier: Modifier) {
+    // 使用 infiniteTransition 来创建无限循环动画
+    val infiniteTransition = rememberInfiniteTransition()
+    val animatedPathLength by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                durationMillis = 2000,
+                easing = FastOutSlowInEasing
+            ),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
+    Canvas(modifier = Modifier.fillMaxSize()) {
+        val path = Path().apply {
+            moveTo(100f, 150f)
+            cubicTo(
+                200f, 300f,
+                300f, 0f,
+                400f, 200f
+            )
+        }
+
+        val measurePath = Path().apply {
+            addPath(path)
+        }
+
+        val measure = PathMeasure()
+        measure.setPath(measurePath, false)
+        val length = measure.length
+
+        val animatedPath = Path()
+        measure.getSegment(0f, animatedPathLength * length, animatedPath, true)
+
+        drawPath(
+            path = animatedPath,
+            brush = SolidColor(Color.Red),
+            style = Stroke(
+                width = 5f,
+                cap = StrokeCap.Round,
+                join = StrokeJoin.Round
+            )
+        )
+    }
 }
 
 @Composable
@@ -325,7 +366,7 @@ fun MioSwitch(modifier: Modifier, checked: Boolean, onCheckedChange: (Boolean) -
 
 @Composable
 fun HoverImage(
-    modifier: Modifier
+    modifier: Modifier,
 ) {
     var imageState by remember { mutableStateOf(ImageState.Small) }
     val transition = updateTransition(targetState = imageState, label = "ImageState Transition")
