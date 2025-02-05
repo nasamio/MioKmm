@@ -1,5 +1,6 @@
 package com.mio.pages.main
 
+import Animation2
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -56,6 +57,9 @@ fun MainUi() {
             }
             composable("animation") {
                 animationUi()
+            }
+            composable("animation2") {
+                Animation2()
             }
             composable("bezier") {
                 Bezier()
