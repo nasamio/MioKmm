@@ -23,16 +23,20 @@ fun Animation2() {
     val f by remember { mutableStateOf(.95f) } //摩擦力
     val e by remember { mutableStateOf(.95f) } // 碰撞能量损耗
 
-
+    // 初始化随机位置 随机速度
     var circles by remember {
         mutableStateOf(
-            listOf(
-                Circle(100f, 100f, vx = 100f),
-                Circle(300f, 100f, vx = -100f),
-                Circle(300f, 300f, vx = 200f),
-            )
+            List(100) {
+                Circle(
+                    Random.nextInt(40, 1920-40).toFloat(),
+                    Random.nextInt(40, 1080-40).toFloat(),
+                    Random.nextInt(-200, 200).toFloat(),
+                    Random.nextInt(-200, 200).toFloat(),
+                )
+            }
         )
     }
+
 
     LaunchedEffect(Unit) {
         while (true) {
