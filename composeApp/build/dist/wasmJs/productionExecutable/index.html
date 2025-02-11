@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="Kmp,Kotlin,Kotlin Multiplatform,Kmp Study">
+    <meta name="baidu-site-verification" content="codeva-fZrIk859u9" />
+    <title>MioKmp</title>
+    <link type="text/css" rel="stylesheet" href="styles.css">
+    <script type="application/javascript" src="composeApp.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .loading-wave {
+            width: 300px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .loading-bar {
+            width: 20px;
+            height: 10px;
+            margin: 0 5px;
+            background-color: #3498db;
+            border-radius: 5px;
+            animation: loading-wave-animation 1.4s ease-in-out infinite;
+        }
+
+        .loading-bar:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .loading-bar:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-bar:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes loading-wave-animation {
+            0% {
+                height: 10px;
+            }
+
+            50% {
+                height: 70px;
+            }
+
+            100% {
+                height: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div id="loading-wave" class="loading-wave">
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+    <div class="loading-bar"></div>
+</div>
+<script lang="js">
+    const observer = new MutationObserver(function (mutations, observer) {
+        if (mutations[0].target.lastChild && mutations[0].target.lastChild.tagName === "CANVAS") {
+
+            const loading = document.getElementById("loading-wave")
+            loading.remove()
+            observer.disconnect()
+        }
+    });
+
+    const body = document.querySelector('body');
+    const config = { attributes: true, childList: true, subtree: true };
+    observer.observe(body, config);
+</script>
+</body>
+
+</html>

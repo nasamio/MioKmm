@@ -17,3 +17,6 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 /composeApp/hs_err_pid46744.log
+
+# 排除一个文件夹 该目录下的需要提交
+!/composeApp/build/dist

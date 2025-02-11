@@ -1,0 +1,40 @@
+#name: Build and Deploy KMP Application
+#
+#on:
+#  push:
+#    branches:
+#      - main  # 或者你想要触发部署的其他分支
+#
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: '11'  # 根据你的项目需要选择合适的 JDK 版本
+#
+#      - name: Cache Gradle packages
+#        uses: actions/cache@v2
+#        with:
+#          path: ~/.gradle/caches
+#          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+#          restore-keys: |
+#            ${{ runner.os }}-gradle-
+#
+#      - name: Build with Gradle
+#        run: ./gradlew build  # 使用 Gradle 构建项目
+#
+#      - name: Run tests
+#        run: ./gradlew test  # 运行项目测试，如果有的话
+#
+#      - name: Deploy to Heroku
+#        env:
+#          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+#        run: |
+#          git remote add heroku https://git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+#          git push heroku main  # 将构建的代码推送到 Heroku

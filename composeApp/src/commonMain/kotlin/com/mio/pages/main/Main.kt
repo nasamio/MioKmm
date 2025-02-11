@@ -70,6 +70,12 @@ fun MainUi() {
             composable("ai") {
                 aiUi()
             }
+
+            composable("test"){
+                Column(
+                    modifier = Modifier.fillMaxSize().background(Color.DarkGray),
+                ) {  }
+            }
         }
 
         // toast
