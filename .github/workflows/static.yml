@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write  # 设置 GITHUB_TOKEN 的权限
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
