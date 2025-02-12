@@ -3,11 +3,14 @@ name: Deploy Static Site
 on:
   push:
     branches:
-      - main  # 或者你想要触发部署的其他分支
+      - master  # 或者你想要触发部署的其他分支
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write  # 设置 GITHUB_TOKEN 的权限
 
     steps:
       - name: Checkout
