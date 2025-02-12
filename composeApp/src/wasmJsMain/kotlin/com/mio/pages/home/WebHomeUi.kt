@@ -40,17 +40,7 @@ fun WebHomeUi() {
     var tableSelect by remember { mutableStateOf(0) }
     val tabs = listOf("Tab 1", "Tab 2", "Tab 3")
 
-    Column(
-        modifier = Modifier.fillMaxSize()
-            .background(
-                brush = Brush.linearGradient(
-                    colors = listOf(
-                        Color(0xff43cbff),
-                        Color(0xff9708cc),
-                    ),
-                ),
-            ),
-    ) {
+    GradientBackgroundAnimation(enable = true) {
         Row(
             modifier = Modifier.height(60.dp)
                 .fillMaxWidth(),
@@ -246,6 +236,20 @@ fun GradientBackgroundAnimation(
                     end = Offset(size.width, size.height)
                 )
                 drawRect(brush = gradient)
+            }
+        } else {
+            Column(
+                modifier = Modifier.fillMaxSize()
+                    .background(
+                        brush = Brush.linearGradient(
+                            colors = listOf(
+                                Color(0xff43cbff),
+                                Color(0xff9708cc),
+                            ),
+                        ),
+                    ),
+            ) {
+
             }
         }
 
