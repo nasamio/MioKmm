@@ -13,7 +13,8 @@ fun main() {
 
 //        testFetch()
 
-            App()
+        val isTestWebApp = true
+        if (isTestWebApp) WebApp() else App()
 //        }
     }
 }

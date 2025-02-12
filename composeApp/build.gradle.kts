@@ -33,12 +33,14 @@ kotlin {
                 entry?.let {
                     println("entry: ${it.absolutePath}")
                 }
+                // 实现本地调试的时候 如果已经有该网页打开 就不开新的；如果没有就开一个
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
                     port = 3579
                     static = (static ?: mutableListOf()).apply {
                         add(rootDirPath)
                         add(projectDirPath)
                     }
+                    open = false
                 }
                 progressReporter = true
                 showProgress = true
@@ -52,6 +54,7 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
+            implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
@@ -94,6 +97,8 @@ kotlin {
         }
         wasmJsMain.dependencies {
             implementation(libs.ktor.client.js)
+//            implementation(libs.androidx.navigation.compose)
+            implementation(libs.navigation.compose)
         }
     }
 }
@@ -123,10 +128,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
-    implementation(libs.androidx.navigation.compose)
+//    implementation(libs.androidx.navigation.compose)
     implementation(libs.core)
     debugImplementation(compose.uiTooling)
 }
