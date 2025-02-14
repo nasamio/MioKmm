@@ -1,7 +1,6 @@
 package com.mio.pages.home
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.animateColor
+import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -20,6 +19,7 @@ import androidx.compose.material.icons.rounded.Create
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.*
 import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.carousel.CarouselDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -136,6 +136,98 @@ fun WebHomeUi() {
         }
 
         Book()
+        SharedTest()
+    }
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+fun SharedTest() {
+    var showDetails by remember { mutableStateOf(false) }
+    // 写一个元素共享的demo
+    SharedTransitionLayout {
+        Box(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            AnimatedContent(
+                showDetails,
+                transitionSpec = {
+                    (fadeIn(animationSpec = tween(660, delayMillis = 90)) +
+                            scaleIn(initialScale = 0.92f, animationSpec = tween(660, delayMillis = 90)))
+                        .togetherWith(fadeOut(animationSpec = tween(90)))
+                },
+            ) {
+                if (it) {
+                    Column(
+                        modifier = Modifier.width(600.dp)
+                            .height(800.dp)
+                            .background(
+                                color = Color.White.copy(alpha = .5f),
+                                shape = RoundedCornerShape(10.dp)
+                            )
+                            .sharedBounds(
+                                sharedContentState = rememberSharedContentState("bounds"),
+                                animatedVisibilityScope = this@AnimatedContent
+                            )
+                            .padding(10.dp)
+                            .clickable {
+                                showDetails = false
+                            }
+                    ) {
+                        Image(
+                            modifier = Modifier.size(300.dp)
+                                .sharedElement(
+                                    state = rememberSharedContentState("img"),
+                                    animatedVisibilityScope = this@AnimatedContent
+                                ),
+                            painter = painterResource(Res.drawable.test),
+                            contentDescription = "test",
+                        )
+                        Text(
+                            modifier = Modifier.sharedElement(
+                                state = rememberSharedContentState("text"),
+                                animatedVisibilityScope = this@AnimatedContent
+                            ),
+                            text = "测试card",
+                        )
+                    }
+                } else {
+                    Row(
+                        modifier = Modifier.width(200.dp)
+                            .height(100.dp)
+                            .background(
+                                color = Color.White.copy(alpha = .5f),
+                                shape = RoundedCornerShape(10.dp)
+                            )
+                            .sharedBounds(
+                                sharedContentState = rememberSharedContentState("bounds"),
+                                animatedVisibilityScope = this@AnimatedContent
+                            )
+                            .padding(10.dp)
+                            .clickable {
+                                showDetails = true
+                            }
+                    ) {
+                        Image(
+                            modifier = Modifier.size(80.dp)
+                                .sharedElement(
+                                    state = rememberSharedContentState("img"),
+                                    animatedVisibilityScope = this@AnimatedContent
+                                ),
+                            painter = painterResource(Res.drawable.test),
+                            contentDescription = "test",
+                        )
+                        Text(
+                            modifier = Modifier.sharedElement(
+                                state = rememberSharedContentState("text"),
+                                animatedVisibilityScope = this@AnimatedContent
+                            ),
+                            text = "测试card",
+                        )
+                    }
+                }
+            }
+        }
     }
 }
 
